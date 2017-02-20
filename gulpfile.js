@@ -356,6 +356,11 @@ gulp.task('run', ['clean', 'serve'], function () {
   gulp.watch(config.folderDev.js + '/*.js').on('change', browserSync.reload);
 });
 
+// Watch for changes
+gulp.task('watch', ['build'], function () {
+  gulp.watch(config.folderAssets.base + '/**/*.scss', ['sass']);
+});
+
 // Define task to deploy to SFTP server
 gulp.task('deploy', ['build'], function () {
   return gulp.src([config.folderDev.base + '/**/*.*', '!./dev/js/vendor/**'])
