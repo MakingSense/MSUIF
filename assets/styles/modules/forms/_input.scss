@@ -24,7 +24,7 @@ $msuxf-input-focus: red !default;
 $msuxf-select-caret: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNzY4IiBoZWlnaHQ9Ijc2OCIgdmlld0JveD0iMCAwIDc2OCA3NjgiPiAgICA8cGF0aCBmaWxsPSIjYjhiOGI4IiBkPSJNMjIzLjUgMzE5LjVoMzIxbC0xNjAuNSAxNjAuNXoiPjwvcGF0aD48L3N2Zz4=") !default;
 
 /// This file contains structure and look&feel for form elements different from radio buttons and checkboxes.
-/// @see {mixin} form
+/// @see {mixin} c-form
 /// @example scss - Using the mixin
 ///   input[type="text"] {
 ///     @include c-form-input();
