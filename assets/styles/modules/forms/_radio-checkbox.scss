@@ -29,7 +29,7 @@ $msuxf-rc-checkbox-border-radius: toem(3px) !default;
 /// @param {color} $label-color [#000] - Element's label color.
 /// @param {color} $label-color [#fff] - Element's marker color.
 /// @param {color} $label-color [#CD5C5C] - Element's background color.
-/// @see {mixin} form
+/// @see {mixin} c-form
 /// @example scss - Using the mixin
 ///   @include c-form-radio-checkbox(checkbox, block, black, red, blue);
 /// @example markup - HTML structure: Element must be followed by a label tag to properly work and inherit styles
