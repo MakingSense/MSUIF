@@ -1,18 +1,37 @@
-.settings
-.svn
-.project
-*.map
-*.scssc
-.node-version
-jeet/
-normalize/
+### Node ###
 node_modules/
-bower_components/
+# Optional npm cache directory
+.npm
+# Logs
+logs
+*.log
+npm-debug.log*
+# Yarn Integrity file
+yarn-debug.log*
+yarn-error.log*
+.yarn-integrity
 
+### Git ###
+*.orig
+
+### BOWER ###
+bower_components
+.bower-cache
+.bower-registry
+.bower-tmp
+
+# dotenv environment variables file
+.env
+
+### Sass ###
+.sass-cache/
+*.css.map
+
+### MSUXF Specific ###
+.ftppass
 documentation/
 dev/
 dist/
-assets/js/vendor/
 assets/styles/libs/*
 !assets/styles/libs/iconfont/
 assets/styles/libs/iconfont/_icon-font.scss
