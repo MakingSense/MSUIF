@@ -44,16 +44,14 @@
     "url": "https://github.com/MakingSense/MSUXF.git"
   },
   "devDependencies": {
-    "autoprefixer": "~6.7.3",
-    "bower": "^1.8.0",
+    "autoprefixer": "^6.7.7",
     "browser-sync": "~2.18.7",
     "css-mqpacker": "~5.0.1",
-    "del": "~2.2.0",
+    "del": "^2.2.2",
     "gulp": "~3.9.1",
-    "gulp-bower": "0.0.13",
-    "gulp-clean-css": "~3.0.0",
+    "gulp-clean-css": "^3.0.3",
     "gulp-concat": "~2.6.0",
-    "gulp-iconfont": "~8.0.0",
+    "gulp-iconfont": "^8.0.1",
     "gulp-iconfont-css": "~2.1.0",
     "gulp-imagemin": "~3.1.1",
     "gulp-kraken": "~0.2.0",
@@ -63,18 +61,15 @@
     "gulp-sass-glob": "^1.0.8",
     "gulp-sftp": "~0.1.5",
     "gulp-sourcemaps": "~2.4.1",
-    "gulp-uglify": "~2.0.0",
+    "gulp-uglify": "^2.1.0",
     "gulp-zip": "~4.0.0",
     "node-sass": "~4.5.0",
     "postcss-clean": "~1.0.2",
-    "sassdoc": "^2.1.20"
+    "sassdoc": "^2.2.0"
   },
   "main": "pdr",
   "engines": {
     "node": ">=6.9.1",
     "npm": ">=3.10.9"
-  },
-  "scripts": {
-    "postinstall": "bower install"
   }
 }

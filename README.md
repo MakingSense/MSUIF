@@ -7,7 +7,7 @@ If you choose Gulp, delete Gruntfile.js, and all grunt related dependecies from 
 ```
 npm install
 ```
-This will install all the dependencies, and run bower install automatically.
+This will install all the dependencies.
 
 To build just run:
 ```
