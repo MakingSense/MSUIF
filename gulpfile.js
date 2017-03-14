@@ -4,8 +4,6 @@ var gulp = require('gulp'),
   sass = require('gulp-sass'),
   // Sass globbing import for LibSass
   globbing = require('gulp-sass-glob'),
-  // Require Gulp-bower to install dependencies
-  bower = require('gulp-bower'),
   // Require Sassdoc
   sassdoc = require('sassdoc'),
   // Require Sourcemaps
@@ -54,14 +52,7 @@ var config = {
     base: 'assets',
     styles: 'assets/styles',
     images: 'assets/img',
-    js: 'assets/js'
-  },
-  folderBower: {
-    base: 'bower_components',
-    jeet: 'bower_components/jeet.gs',
-    normalize: 'bower_components/normalize-scss',
-    sassyCast: 'bower_components/sassy-cast',
-    jquery: 'bower_components/jquery-latest'
+    js: 'assets/js'  
   },
   folderDist: {
     base: 'dist',
@@ -115,7 +106,7 @@ var config = {
 
 // Sass tasks are divided for performance issues regarding dependencies
 // Sass Build task definition, only ran once
-gulp.task('sass:build', ['webfont', 'bowercopy'], function () {
+gulp.task('sass:build', ['webfont'], function () {
   return gulp.src(config.folderAssets.styles + '/styles.scss')
     .pipe(globbing({
       // Configure it to use SCSS files
@@ -260,33 +251,6 @@ gulp.task('doc', function () {
     .pipe(docstream);
 });
 
-// Run bower update
-gulp.task('bower', function () {
-  return bower({
-    cmd: 'update'
-  });
-});
-
-// Copy only the needed resources from Bower
-gulp.task('bowercopy', ['bowercopy:jeet', 'bowercopy:normalize', 'bowercopy:sassy-cast', 'bowercopy:jquery']);
-
-gulp.task('bowercopy:jeet', ['bower'], function () {
-  return gulp.src([config.folderBower.jeet + '/scss/*.scss'])
-    .pipe(gulp.dest(config.folderAssets.styles + '/libs/jeet'));
-});
-gulp.task('bowercopy:normalize', ['bower'], function () {
-  return gulp.src([config.folderBower.normalize + '/*.scss'])
-    .pipe(gulp.dest(config.folderAssets.styles + '/libs/normalize'));
-});
-gulp.task('bowercopy:sassy-cast', ['bower'], function () {
-  return gulp.src([config.folderBower.sassyCast + '/dist/*.scss'])
-    .pipe(gulp.dest(config.folderAssets.styles + '/libs/sassy-cast'));
-});
-gulp.task('bowercopy:jquery', ['bower'], function () {
-  return gulp.src([config.folderBower.jquery + '/dist/jquery.min.js'])
-    .pipe(gulp.dest(config.folderDev.base + '/js/vendor'));
-});
-
 // Optimize JS
 gulp.task('js:dist', function () {
   return gulp.src([config.folderAssets.js + '/**/*.js'])
@@ -299,10 +263,22 @@ gulp.task('js:dist', function () {
     .pipe(gulp.dest(config.folderDist.js));
 });
 
-// Copy JS
-gulp.task('copy:js', function () {
-  return gulp.src([config.folderAssets.js + '/**/*.js'])
+// Copy Vendors
+gulp.task('copy:vendors', function () {
+  return gulp.src([config.folderAssets.js + '/vendors/*.js'])
+    .pipe(concat('vendors.js', {
+      newLine: ';'
+    }))
     .pipe(gulp.dest(config.folderDev.js));
+});
+
+//Copy JS
+gulp.task('copy:js', ['copy:vendors'], function(){
+  return gulp.src([config.folderAssets.js + '/*.js'])
+  .pipe(concat('main.js', {
+      newLine: ';'
+  }))
+  .pipe(gulp.dest(config.folderDev.js));
 });
 
 // Optimize Images
@@ -337,13 +313,10 @@ gulp.task('copy:images', function () {
 });
 
 // Delete dev folder for cleaning
-gulp.task('clean', ['clean:dev', 'clean:bower']);
+gulp.task('clean', ['clean:dev']);
 
 gulp.task('clean:dev', function () {
   return del.sync(config.folderDev.base);
-});
-gulp.task('clean:bower', function () {
-  return del.sync([config.folderBower.base]);
 });
 
 // Watch for changes
