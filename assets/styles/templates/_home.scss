@@ -1,5 +1,140 @@
-////
-/// Home
-/// @group Home
-/// @author MS
-////
+/* ==========================================================================
+    Home
+    @group Home
+    @author MS
+   ========================================================================== */
+
+
+/* Local variables
+   ========================================================================== */
+
+
+/* Coding
+   ========================================================================== */
+
+.home-hero {
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: space-between;
+
+  padding-top: toem(105px);
+
+  min-height: 87vh;
+  .wrapper--full--right {
+    width: 100%;
+  }
+  .block-image {
+    text-align: right;
+    video {
+      width: 85%;
+      mix-blend-mode: multiply;
+      vertical-align: bottom;
+    }
+    img {
+      display: block;
+
+      margin: 0 auto;
+
+      max-width: toem(585px);
+    }
+  }
+  .block-content {
+    h1 {
+      line-height: 0.85;
+      span {
+        display: block;
+
+        letter-spacing: 0;
+
+        font-size: torem(52px);
+      }
+    }
+    h5 {
+      margin: torem(40px) 0 torem(70px) 0;
+
+      color: $msuif-color-quinary;
+    }
+    .content-quote {
+      display: flex;
+
+      align-items: center;
+
+      margin-bottom: toem(64px);
+      img {
+        margin-right: toem(25px);
+      }
+      blockquote p {
+        margin: 0;
+
+        line-height: 1.6;
+        color: $msuif-color-quinary;
+
+        font-size: toem(14px);
+        font-style: italic;
+      }
+    }
+  }
+}
+
+.home-hero__items {
+  .block-container {
+    align-items: stretch;
+  }
+  .block {
+    position: relative;
+
+    transition: all $msuif-transition-duration $msuif-transition-timing;
+
+    padding: toem(40px);
+
+    min-height: toem(370px);
+    &:hover {
+      box-shadow: inset 0 4px 0 0 $msuif-color-primary;
+    }
+    &__title {
+      margin: 0;
+      margin-bottom: torem(30px);
+
+      line-height: 1;
+
+      font-weight: 600;
+    }
+    &__image {
+      display: block;
+
+      margin: 0 auto;
+      &.block__image--abs {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+      }
+    }
+    &.block-information {
+      .block__list {
+        margin: 0;
+
+        padding: 0;
+
+        list-style-type: none;
+        li {
+          line-height: 2;
+          a {
+            color: $msuif-color-quinary;
+
+            font-size: toem(20px);
+            &:hover {
+              color: $msuif-color-primary;
+            }
+          }
+        }
+      }
+    }
+    &.block-students {
+      .block__title {
+        margin-bottom: torem(75px);
+      }
+    }
+  }
+}

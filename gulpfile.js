@@ -54,6 +54,7 @@ var config = {
     base: 'assets',
     styles: 'assets/styles',
     images: 'assets/img',
+    fonts: 'assets/fonts',
     js: 'assets/js'
   },
   folderBower: {
@@ -327,7 +328,13 @@ gulp.task('kraken', function() {
 // Copy Images
 gulp.task('copy:images', function() {
   return gulp.src([config.folderAssets.images + '/**/*'])
-    .pipe(gulp.dest(config.folderDist.images));
+    .pipe(gulp.dest(config.folderDev.images));
+});
+
+// Copy Images
+gulp.task('copy:fonts:dev', function() {
+  return gulp.src([config.folderAssets.fonts + '/**/*'])
+    .pipe(gulp.dest(config.folderDev.fonts));
 });
 
 // Delete dev folder for cleaning
@@ -346,7 +353,8 @@ gulp.task('run', ['clean', 'serve'], function() {
   gulp.watch(config.folderAssets.base + '/icons/*.svg', ['webfont']);
   gulp.watch(config.folderAssets.images + '/*.*', ['copy:images']);
   gulp.watch(config.folderAssets.js + '/*', ['copy:js']);
-  gulp.watch(config.folderAssets.base + '/templates/*.html', ['processHtml']);
+  gulp.watch(config.folderAssets.fonts + '/*.*', ['copy:fonts:dev']);
+  gulp.watch(config.folderAssets.base + '/templates/**/*.html', ['processHtml']);
   gulp.watch(config.folderDev.js + '/*.js').on('change', browserSync.reload);
 });
 

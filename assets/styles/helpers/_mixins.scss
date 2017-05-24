@@ -106,3 +106,15 @@
     border-top:    $perpendicular-borders;
   }
 }
+
+@mixin links-nav($color: $msuif-color-quinary, $font-size: $msuif-headers-p-font-size) {
+  line-height: 1;
+  color: $color;
+  font-size: $font-size;
+
+  font-weight: 700;
+  &:hover {
+    color: $msuif-color-primary;
+  }
+}
+

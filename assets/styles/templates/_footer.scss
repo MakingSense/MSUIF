@@ -1,5 +1,70 @@
-////
-/// Footer
-/// @group Footer
-/// @author MS
-////
+/* ==========================================================================
+    Footer
+    @group Footer
+    @author MS
+   ========================================================================== */
+
+
+/* Local variables
+   ========================================================================== */
+
+
+/* Coding
+   ========================================================================== */
+
+.footer {
+  background: $msuif-color-octonary;
+
+  width: 100%;
+  .wrapper--full {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: toem(25px) toem(25px) toem(25px) toem(50px);
+    &:before,
+    &:after {
+      content: initial;
+    }
+  }
+  &__copyright {
+    p {
+      margin: 0;
+
+      color: $msuif-color-nonary;
+
+      font-weight: 600;
+    }
+  }
+  &__nav {
+    display: flex;
+
+    align-items: center;
+    &__container,
+    .footer__social__container {
+      display: flex;
+
+      padding: 0;
+
+      list-style-type: none;
+    }
+    &__item,
+    .footer__social__item {
+      padding: 0 toem(16px);
+      a {
+        @include links-nav($msuif-color-nonary, toem(14px));
+
+        text-transform: uppercase;
+
+        font-weight: 600;
+        &:hover {
+          svg path {
+            fill: $msuif-color-primary;
+          }
+        }
+      }
+    }
+  }
+}

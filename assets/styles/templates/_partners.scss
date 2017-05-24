@@ -1,0 +1,306 @@
+/* ==========================================================================
+    Partners
+    @group Partners
+    @author MS
+   ========================================================================== */
+
+
+/* Local variables
+   ========================================================================== */
+
+
+/* Coding
+   ========================================================================== */
+.partners {
+  &-filter__container {
+    display: flex;
+
+    margin: 0;
+
+    padding: 0;
+    padding-bottom: toem(20px);
+
+    width: 100%;
+
+    list-style: none;
+    li {
+      margin-right: toem(20px);
+      a {
+        @include links-nav($msuif-color-quinary, toem(15px));
+      }
+    }
+  }
+}
+.case-studies {
+  padding: toem(45px) 0 toem(65px) 0;
+  &__container {
+    display: flex;
+    position: relative;
+
+    align-items: flex-start;
+
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    margin: 0;
+
+    padding: 0;
+
+    height: 85vh;
+
+    list-style-type: none;
+  }
+  &__item {
+    display: flex;
+    position: absolute;
+
+    align-items: center;
+
+    justify-content: center;
+
+    transition: width 0.30s cubic-bezier(0.46, 0.03, 0.52, 0.96),
+    height 0.30s cubic-bezier(0.46, 0.03, 0.52, 0.96);
+
+    margin-bottom: toem(20px);
+
+    background: $msuif-color-quaternary;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    cursor: pointer;
+
+    width: 32.5%;
+
+    height: 47.9%;
+
+    overflow: hidden;
+    .content {
+      transition: opacity 0.30s cubic-bezier(0.46, 0.03, 0.52, 0.96);
+
+      opacity: 0;
+
+      width: 0;
+
+      height: 0;
+      .block-container {
+        align-items: stretch;
+
+        height: 100%;
+      }
+      .block {
+        margin: 0;
+
+        width: 50%;
+      }
+      .block__content {
+        align-self: center;
+
+        padding: toem(35px);
+        h2 {
+          font-size: toem(36px);
+          color: $msuif-color-octonary;
+        }
+      }
+      .case-studies__close {
+        position: absolute;
+        top: torem(35px);
+        right: torem(35px);
+
+        z-index: 100;
+
+        cursor: pointer;
+
+        color: #bbbcbc;
+
+        font-size: toem(45px);
+        font-weight: 600;
+        &:hover {
+          color: shade(#bbbcbc, 15%);
+        }
+      }
+    }
+    svg {
+      position: relative;
+
+      opacity: 1;
+      z-index: 10;
+    }
+    &:before {
+      position: absolute;
+
+      z-index: 1;
+
+      background: rgba($msuif-color-octonary, 0.75);
+
+      width: 100%;
+
+      height: 100%;
+
+      content: '';
+    }
+    &:after {
+      position: absolute;
+
+      transition: opacity 0.35s cubic-bezier(0.45,0.05,0.55,0.95);
+
+      opacity: 0;
+      z-index: 1;
+
+      background: rgba($msuif-color-primary, 0.9);
+
+      padding-top: 40%;
+
+      width: 100%;
+
+      height: 100%;
+
+      text-align: center;
+
+      color: white;
+
+      font-size: 32px;
+
+      content: attr(data-quote);
+    }
+    &:hover {
+      svg {
+        opacity: 0;
+      }
+      &:after {
+        opacity: 1;
+      }
+    }
+    &.active {
+      svg {
+        display: none;
+      }
+      &:hover {
+        &:after {
+          opacity: 0;
+        }
+      }
+    }
+    &.cosmopolitan {
+      top: 0;
+      left: 0;
+
+      background-image: url('../img/partners/cosmopolitan.jpg');
+      .content {
+        .block__image {
+          background: url('../img/partners/cosmopolitan.jpg');
+          background-position: center center;
+          background-size: cover;
+        }
+      }
+    }
+    &.visa {
+      top: 0;
+      left: 50%;
+
+      transform: translateX(-50%);
+
+      background-image: url('../img/partners/visa.jpg');
+      .content {
+        .block__image {
+          background: url('../img/partners/visa.jpg');
+          background-position: center center;
+          background-size: cover;
+        }
+      }
+    }
+    &.chevrolet {
+      top: 0;
+      right: 0;
+
+      background-image: url('../img/partners/chevrolet.jpg');
+      .content {
+        .block__image {
+          background: url('../img/partners/full/chevrolet.jpg');
+          background-position: center center;
+          background-size: cover;
+        }
+      }
+    }
+    &.kind {
+      bottom: 0;
+      left: 0;
+
+      background-image: url('../img/partners/kind.jpg');
+      .content {
+        .block__image {
+          background: url('../img/partners/kind.jpg');
+          background-position: center center;
+          background-size: cover;
+        }
+      }
+    }
+    &.poppin {
+      bottom: 0;
+      left: 50%;
+
+      transform: translateX(-50%);
+
+      background-image: url('../img/partners/poppin.jpg');
+      .content {
+        .block__image {
+          background: url('../img/partners/poppin.jpg');
+          background-position: center center;
+          background-size: cover;
+        }
+      }
+    }
+    &.goodnessknows {
+      right: 0;
+      bottom: 0;
+
+      background-image: url('../img/partners/goodnessknows.jpg');
+      .content {
+        .block__image {
+          background: url('../img/partners/goodnessknows.jpg');
+          background-position: center center;
+          background-size: cover;
+        }
+      }
+    }
+  }
+  .visible {
+    opacity: 1;
+
+    width: 100%;
+
+    height: 100%;
+  }
+  .index {
+    z-index: 20;
+  }
+  .active {
+    z-index: 25;
+
+    background: $msuif-color-senary;
+
+    cursor: default;
+
+    width: 100%;
+
+    height: 100%;
+    &:before {
+      content: initial;
+    }
+  }
+}
+
+.partners-logos {
+  background: $msuif-color-senary;
+
+  padding: toem(75px) 0 toem(100px) 0;
+
+  text-align: center;
+  p {
+    margin: torem(28px) 0 torem(60px) 0;
+
+    line-height: 1.33;
+    color: $msuif-color-quinary;
+
+    font-size: toem(18px);
+  }
+}
