@@ -1,52 +1,5 @@
-/* ==========================================================================
-    Header
-    @group Header
-    @author MS
-   ========================================================================== */
-
-
-/* Local variables
-   ========================================================================== */
-
-
-/* Coding
-   ========================================================================== */
-
-.header {
-  position: fixed;
-
-  width: 100%;
-  .wrapper--full {
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    padding: toem(24px) toem(25px) toem(24px) toem(50px);
-    &:before,
-    &:after {
-      content: initial;
-    }
-  }
-  &__nav {
-    &__container {
-      display: flex;
-
-      align-items: center;
-
-      padding: 0;
-
-      list-style-type: none;
-    }
-    &__item {
-      padding: 0 toem(16px);
-      a:not(.button) {
-        @include links-nav();
-      }
-      &:last-of-type {
-        margin-left: toem(45px);
-      }
-    }
-  }
-}
+////
+/// Header
+/// @group Header
+/// @author MS
+////

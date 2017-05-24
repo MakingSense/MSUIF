@@ -4,157 +4,46 @@
 /// @group Settings
 ////
 
-///Colors///
-
-$msuif-color-primary: #43A8C7;
-$msuif-color-secondary: #FF8041;
-$msuif-color-tertiary: #B5BE00;
-$msuif-color-quaternary: #222222;
-$msuif-color-quinary: #76777B;
-$msuif-color-senary: #F6F6FB;
-$msuif-color-septenary: #E0E0E0;
-$msuif-color-octonary: #444444;
-$msuif-color-nonary: #FFFFFF;
-$msuif-color-denary: #000;
-
-/* Icons */
-@font-face {
-  font-family: 'slick';
-  font-weight: normal;
-  font-style: normal;
-
-  src: slick-font-url('../fonts/slick.eot');
-  src: slick-font-url('../fonts/slick.eot?#iefix') format('embedded-opentype'), slick-font-url('../fonts/slick.woff') format('woff'), slick-font-url('../fonts/slick.ttf') format('truetype'), slick-font-url('../fonts/slick.svg#slick') format('svg');
-}
-
-@font-face {
-  font-family: 'Proxima Nova';
-  font-weight: 700;
-  font-style: normal;
-
-  src: url('../fonts/proxima-nova-bold.woff2') format('woff2'),
-  url('../fonts/proxima-nova-bold.woff') format('woff');
-}
-
-@font-face {
-  font-family: 'Proxima Nova';
-  font-weight: 300;
-  font-style: normal;
-
-  src: url('../fonts/proxima-nova-light.woff2') format('woff2'),
-  url('../fonts/proxima-nova-light.woff') format('woff');
-}
-
-@font-face {
-  font-family: 'Proxima Nova';
-  font-weight: 400;
-  font-style: normal;
-
-  src: url('../fonts/proxima-nova-regular.woff2') format('woff2'),
-  url('../fonts/proxima-nova-regular.woff') format('woff');
-}
-
-@font-face {
-  font-family: 'Proxima Nova';
-  font-weight: 400;
-  font-style: italic;
-
-  src: url('../fonts/proxima-nova-regular-italic.woff2') format('woff2'),
-  url('../fonts/proxima-nova-regular-italic.woff') format('woff');
-}
-
-@font-face {
-  font-family: 'Proxima Nova';
-  font-weight: 600;
-  font-style: normal;
-
-  src: url('../fonts/proxima-nova-semibold.woff2') format('woff2'),
-  url('../fonts/proxima-nova-semibold.woff') format('woff');
-}
-
-@font-face {
-  font-family: 'DINCondensed';
-  font-weight: 300;
-  font-style: normal;
-
-  src: url('../fonts/DINCondensed-Light.woff') format('woff'),
-  url('../fonts/DINCondensed-Light.eot'),
-  url('../fonts/DINCondensed-Light.woff2') format('woff2'),
-  url('../fonts/DINCondensed-Light.eot?#iefix') format('embedded-opentype'),
-  url('../fonts/DINCondensed-Light.svg#DINCondensed-Light') format('svg');
-}
-
-@font-face {
-  font-family: 'DINCondensed';
-  font-weight: 400;
-  font-style: normal;
-
-  src: url('../fonts/DINCondensed-Regular.woff') format('woff'),
-  url('../fonts/DINCondensed-Regular.ttf') format('truetype'),
-  url('../fonts/DINCondensed-Regular.eot'),
-  url('../fonts/DINCondensed-Regular.woff2') format('woff2'),
-  url('../fonts/DINCondensed-Regular.eot?#iefix') format('embedded-opentype'),
-  url('../fonts/DINCondensed-Regular.svg#DINCondensed-Light') format('svg');
-}
-
-@font-face {
-  font-family: 'DINCondensed';
-  font-weight: 700;
-  font-style: normal;
-
-  src: url('../fonts/DINCondensed-Bold.woff') format('woff'),
-  url('../fonts/DINCondensed-Bold.ttf') format('truetype'),
-  url('../fonts/DINCondensed-Bold.eot'),
-  url('../fonts/DINCondensed-Bold.woff2') format('woff2'),
-  url('../fonts/DINCondensed-Bold.eot?#iefix') format('embedded-opentype'),
-  url('../fonts/DINCondensed-Bold.svg#DINCondensed-Bold') format('svg');
-}
-
-
 
 /// Fonts ///
 ///
-$msuif-font-size: 16px;
+$msuif-font-size:                 16px;
 ///
-$msuif-font-weight: 400;
+$msuif-font-weight:               400;
 ///
-$msuif-font-family: 'Proxima Nova', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$msuif-font-family:               Arial, "Helvetica Neue", Helvetica, sans-serif;
 ///
-$msuif-font-family-din: 'DINCondensed', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$msuif-font:                      $msuif-font-weight toem($msuif-font-size) $msuif-font-family;
 ///
-$msuif-font: $msuif-font-weight toem($msuif-font-size) $msuif-font-family;
+$msuif-font-weight-light:         300;
 ///
-$msuif-font-weight-light: 300;
+$msuif-font-weight-regular:       $msuif-font-weight;
 ///
-$msuif-font-weight-regular: $msuif-font-weight;
+$msuif-font-weight-semibold:      600;
 ///
-$msuif-font-weight-semibold: 600;
+$msuif-font-weight-bold:          700;
 ///
-$msuif-font-weight-bold: 700;
+$msuif-font-color:                #101010;
 ///
-$msuif-font-color: $msuif-color-quaternary;
+$msuif-font-color-bright:         #edede6;
 ///
-$msuif-font-color-bright: $msuif-color-senary;
+$msuif-font-color-dark:           $msuif-font-color;
 ///
-$msuif-font-color-dark: $msuif-font-color;
-///
-$msuif-font-color-white: #fff;
+$msuif-font-color-white:          #fff;
 
 
 
 /// Background ///
-
 ///
-$msuif-background: $msuif-color-nonary;
+$msuif-background:                $msuif-font-color-bright;
 ///
-$msuif-background-bright: $msuif-background;
+$msuif-background-bright:         $msuif-background;
 
 
 
 /// Wrapper ///
 ///
-$msuif-wrapper-max-width: torem(1200px);
-$msuif-wrapper-min-width: torem(750px);
+$msuif-wrapper-min-width:         torem(1200px);
 
 
 
@@ -173,6 +62,6 @@ $msuif-breakpoints: (
 
 /// Transition/Animation ///
 ///
-$msuif-transition-duration: 0.25s;
+$msuif-transition-duration:      0.25s;
 ///
-$msuif-transition-timing: ease;
+$msuif-transition-timing:        ease;
