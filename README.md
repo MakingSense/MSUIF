@@ -1,9 +1,8 @@
 MSUXF - Making Sense's UX Development Framework
 ==============
 
-After downloading the framework you should choose Gulp or Grunt as a task runner.
+The first thing you need to do is to install Gulp dependencies. To do that, execute the following command.
 
-If you choose Gulp, delete Gruntfile.js, and all grunt related dependecies from package.json and then run:
 ```
 npm install
 ```
