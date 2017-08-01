@@ -309,7 +309,7 @@ gulp.task('kraken', function () {
 // Copy Images
 gulp.task('copy:images', function () {
   return gulp.src([config.folderAssets.images + '/**/*'])
-    .pipe(gulp.dest(config.folderDist.images));
+    .pipe(gulp.dest(config.folderDev.images));
 });
 
 // Delete dev folder for cleaning
@@ -323,7 +323,7 @@ gulp.task('clean:dev', function () {
 gulp.task('run', ['clean', 'serve'], function () {
   gulp.watch(config.folderAssets.base + '/**/*.scss', ['sass']);
   gulp.watch(config.folderAssets.base + '/icons/*.svg', ['webfont']);
-  gulp.watch(config.folderAssets.images + '/*.*', ['copy:images']);
+  gulp.watch(config.folderAssets.images + '/**/*.*', ['copy:images']);
   gulp.watch(config.folderAssets.js + '/*', ['copy:js']);
   gulp.watch(config.folderAssets.base + '/templates/*.html', ['processHtml']);
   gulp.watch(config.folderDev.js + '/*.js').on('change', browserSync.reload);
