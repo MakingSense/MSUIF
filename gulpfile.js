@@ -23,6 +23,8 @@ var gulp = require('gulp'),
   autoprefixer = require('autoprefixer'),
   // Require postCSS clean
   cleanCSS = require('gulp-clean-css'),
+  // CSSO Plugin
+  csso = require('gulp-csso'),
   // Require Css-MQpacker// Clean CSS
   mqpacker = require('css-mqpacker'),
   // Image optimization plugin
@@ -52,7 +54,7 @@ var config = {
     base: 'assets',
     styles: 'assets/styles',
     images: 'assets/img',
-    js: 'assets/js'  
+    js: 'assets/js'
   },
   folderDist: {
     base: 'dist',
@@ -106,7 +108,7 @@ var config = {
 
 // Sass tasks are divided for performance issues regarding dependencies
 // Sass Build task definition, only ran once
-gulp.task('sass:build', ['webfont'], function () {
+gulp.task('sass:build', ['webfont'], function() {
   return gulp.src(config.folderAssets.styles + '/styles.scss')
     .pipe(globbing({
       // Configure it to use SCSS files
@@ -118,6 +120,7 @@ gulp.task('sass:build', ['webfont'], function () {
     .pipe(cleanCSS({
       advanced: true
     }))
+    .pipe(csso())
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(config.folderDev.css))
     .pipe(browserSync.reload({
@@ -126,7 +129,7 @@ gulp.task('sass:build', ['webfont'], function () {
 });
 
 // Sass Watch task definition
-gulp.task('sass', function () {
+gulp.task('sass', function() {
   return gulp.src(config.folderAssets.styles + '/styles.scss')
     .pipe(globbing({
       // Configure it to use SCSS files
@@ -138,6 +141,7 @@ gulp.task('sass', function () {
     .pipe(cleanCSS({
       advanced: true
     }))
+    .pipe(csso())
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(config.folderDev.css))
     .pipe(browserSync.reload({
@@ -146,13 +150,13 @@ gulp.task('sass', function () {
 });
 
 // CSS copy to dist folder
-gulp.task('copy:css', ['sass:build'], function () {
+gulp.task('copy:css', ['sass:build'], function() {
   return gulp.src(config.folderDev.css + '/*.*')
     .pipe(gulp.dest(config.folderDist.css));
 });
 
 // Browser Sync task definition
-gulp.task('serve', ['build'], function () {
+gulp.task('serve', ['build'], function() {
   return browserSync.init({
     port: 1337,
     server: {
@@ -164,7 +168,7 @@ gulp.task('serve', ['build'], function () {
   });
 });
 
-gulp.task('serve:sassdoc', function () {
+gulp.task('serve:sassdoc', function() {
   return browserSync.init({
     port: 1339,
     server: {
@@ -177,7 +181,7 @@ gulp.task('serve:sassdoc', function () {
 });
 
 // Process HTML task definition
-gulp.task('processHtml', function () {
+gulp.task('processHtml', function() {
   return gulp.src(config.folderAssets.base + '/templates/*.html')
     .pipe(processHtml({
       recursive: true,
@@ -190,7 +194,7 @@ gulp.task('processHtml', function () {
 });
 
 // Process HTML task definition for distribution purposes
-gulp.task('processHtml:dist', function () {
+gulp.task('processHtml:dist', function() {
   return gulp.src(config.folderAssets.base + '/templates/*.html')
     .pipe(processHtml({
       recursive: true,
@@ -200,16 +204,16 @@ gulp.task('processHtml:dist', function () {
 });
 
 // Generate webfonts
-gulp.task('webfont', ['webfont:copy'], function () {
+gulp.task('webfont', ['webfont:copy'], function() {
   return del([config.folderDev.fonts + '/*.scss']);
 });
 
-gulp.task('webfont:copy', ['webfont:generate'], function () {
+gulp.task('webfont:copy', ['webfont:generate'], function() {
   return gulp.src([config.folderDev.fonts + '/_icon-font.scss'])
     .pipe(gulp.dest(config.folderAssets.styles + '/libs/iconfont/'));
 });
 
-gulp.task('webfont:generate', function () {
+gulp.task('webfont:generate', function() {
   var fontName = 'icon-font';
   return gulp.src([config.folderAssets.base + '/icons/*.svg'])
     .pipe(iconfontCss({
@@ -228,23 +232,23 @@ gulp.task('webfont:generate', function () {
 });
 
 // Copy webfonts to Dist folder
-gulp.task('copy:fonts', ['sass:build'], function () {
+gulp.task('copy:fonts', ['sass:build'], function() {
   return gulp.src(config.folderDev.fonts + '/*.*')
     .pipe(gulp.dest(config.folderDist.fonts));
 });
 
 // Sassdoc generation Task definition
 // starts doc browserSync server and watches for changes
-gulp.task('doc:watch', ['doc:serve'], function () {
+gulp.task('doc:watch', ['doc:serve'], function() {
   gulp.watch(config.folderAssets.base + '/**/*.scss', ['doc']);
 });
 
-gulp.task('doc:serve', ['serve:sassdoc'], function () {
+gulp.task('doc:serve', ['serve:sassdoc'], function() {
   return gulp.src(config.folderAssets.base + '/**/*.scss')
     .pipe(sassdoc(config.sassDocOptions));
 });
 
-gulp.task('doc', function () {
+gulp.task('doc', function() {
   var docstream = sassdoc(config.sassDocOptions);
   docstream.promise.then(browserSync.reload);
   return gulp.src(config.folderAssets.base + '/**/*.scss')
@@ -252,7 +256,7 @@ gulp.task('doc', function () {
 });
 
 // Optimize JS
-gulp.task('js:dist', function () {
+gulp.task('js:dist', function() {
   return gulp.src([config.folderAssets.js + '/**/*.js'])
     .pipe(sourcemaps.init())
     .pipe(concat('app.js', {
@@ -264,7 +268,7 @@ gulp.task('js:dist', function () {
 });
 
 // Copy Vendors
-gulp.task('copy:vendors', function () {
+gulp.task('copy:vendors', function() {
   return gulp.src([config.folderAssets.js + '/vendors/*.js'])
     .pipe(concat('vendors.js', {
       newLine: ';'
@@ -273,16 +277,16 @@ gulp.task('copy:vendors', function () {
 });
 
 //Copy JS
-gulp.task('copy:js', ['copy:vendors'], function(){
+gulp.task('copy:js', ['copy:vendors'], function() {
   return gulp.src([config.folderAssets.js + '/*.js'])
-  .pipe(concat('main.js', {
+    .pipe(concat('main.js', {
       newLine: ';'
-  }))
-  .pipe(gulp.dest(config.folderDev.js));
+    }))
+    .pipe(gulp.dest(config.folderDev.js));
 });
 
 // Optimize Images
-gulp.task('images:dist', function () {
+gulp.task('images:dist', function() {
   return gulp.src([config.folderAssets.images + '/**/*'])
     .pipe(imagemin({
       optimizationLevel: 5,
@@ -295,7 +299,7 @@ gulp.task('images:dist', function () {
 });
 
 // Kraken task (set up if needed)
-gulp.task('kraken', function () {
+gulp.task('kraken', function() {
   gulp.src([config.folderAssets.images + '/**/*'])
     .pipe(kraken({
       key: 'kraken-api-key-here',
@@ -307,7 +311,7 @@ gulp.task('kraken', function () {
 });
 
 // Copy Images
-gulp.task('copy:images', function () {
+gulp.task('copy:images', function() {
   return gulp.src([config.folderAssets.images + '/**/*'])
     .pipe(gulp.dest(config.folderDev.images));
 });
@@ -315,12 +319,12 @@ gulp.task('copy:images', function () {
 // Delete dev folder for cleaning
 gulp.task('clean', ['clean:dev']);
 
-gulp.task('clean:dev', function () {
+gulp.task('clean:dev', function() {
   return del.sync(config.folderDev.base);
 });
 
 // Watch for changes
-gulp.task('run', ['clean', 'serve'], function () {
+gulp.task('run', ['clean', 'serve'], function() {
   gulp.watch(config.folderAssets.base + '/**/*.scss', ['sass']);
   gulp.watch(config.folderAssets.base + '/icons/*.svg', ['webfont']);
   gulp.watch(config.folderAssets.images + '/**/*.*', ['copy:images']);
@@ -330,12 +334,12 @@ gulp.task('run', ['clean', 'serve'], function () {
 });
 
 // Watch for changes
-gulp.task('watch', ['build'], function () {
+gulp.task('watch', ['build'], function() {
   gulp.watch(config.folderAssets.base + '/**/*.scss', ['sass']);
 });
 
 // Define task to deploy to SFTP server
-gulp.task('deploy', ['build'], function () {
+gulp.task('deploy', ['build'], function() {
   return gulp.src([config.folderDev.base + '/**/*.*', '!./dev/js/vendor/**'])
     .pipe(sftp({
       host: '',
@@ -347,14 +351,13 @@ gulp.task('deploy', ['build'], function () {
 });
 
 // Define Dist generation and zipping
-gulp.task('dist:zip', ['dist'], function () {
+gulp.task('dist:zip', ['dist'], function() {
   var today = new Date();
   return gulp.src(config.folderDist.base)
     .pipe(zip('deploy--' +
       today.getFullYear() + '-' +
       (today.getMonth() + 1) + '-' +
-      today.getDate() +
-      '_' +
+      today.getDate() + '_' +
       today.getHours() + '-' +
       today.getMinutes() + '-' +
       today.getSeconds() +
