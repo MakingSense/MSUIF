@@ -35,8 +35,8 @@
       "email": "farza@makingsense.com"
     },
     {
-      "name": "Nicolás Martello",
-      "email": "nmartello@makingsense.com"
+      "name": "Marcos Rigoli",
+      "email": "mrigoli@makingsense.com"
     }
   ],
   "repository": {
@@ -44,29 +44,29 @@
     "url": "https://github.com/MakingSense/MSUXF.git"
   },
   "devDependencies": {
-    "autoprefixer": "^6.7.7",
-    "browser-sync": "~2.18.7",
-    "css-mqpacker": "~5.0.1",
-    "del": "^2.2.2",
+    "autoprefixer": "^7.1.4",
+    "browser-sync": "~2.18.13",
+    "css-mqpacker": "~6.0.1",
+    "del": "^3.0.0",
     "gulp": "~3.9.1",
-    "gulp-clean-css": "^3.0.3",
+    "gulp-clean-css": "^3.8.0",
     "gulp-concat": "~2.6.0",
     "gulp-csso": "^3.0.0",
-    "gulp-iconfont": "^8.0.1",
+    "gulp-iconfont": "^9.0.1",
     "gulp-iconfont-css": "~2.1.0",
-    "gulp-imagemin": "~3.1.1",
+    "gulp-imagemin": "~3.3.0",
     "gulp-kraken": "~0.2.0",
-    "gulp-postcss": "~6.3.0",
+    "gulp-postcss": "~7.0.0",
     "gulp-processhtml": "~1.1.0",
     "gulp-sass": "~3.1.0",
     "gulp-sass-glob": "^1.0.8",
     "gulp-sftp": "~0.1.5",
-    "gulp-sourcemaps": "~2.4.1",
-    "gulp-uglify": "^2.1.0",
+    "gulp-sourcemaps": "~2.6.1",
+    "gulp-uglify": "^3.0.0",
     "gulp-zip": "~4.0.0",
-    "node-sass": "~4.5.0",
-    "postcss-clean": "~1.0.2",
-    "sassdoc": "^2.2.0"
+    "node-sass": "~4.5.3",
+    "postcss-clean": "~1.0.3",
+    "sassdoc": "^2.3.0"
   },
   "main": "pdr",
   "engines": {
