@@ -27,6 +27,7 @@ var gulp = require('gulp'),
   csso = require('gulp-csso'),
   // Require Css-MQpacker// Clean CSS
   mqpacker = require('css-mqpacker'),
+  sortCSSmq = require('sort-css-media-queries'),
   // Image optimization plugin
   imagemin = require('gulp-imagemin'),
   // Image optimization using Kraken API
@@ -90,7 +91,9 @@ var config = {
           'ie 9' //This is a Default Autoprefixer Config. In case that you need to add other browser support uncomment from above.
         ]
       }),
-      mqpacker()
+      mqpacker({
+        sort: sortCSSmq
+      })
     ]
   },
   // Sassdoc task options
