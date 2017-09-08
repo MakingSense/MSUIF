@@ -5,130 +5,109 @@
 ////
 
 ///
-$rating-type: clickable !default;
+$rating-min-value: 0 !default;
 ///
-$rating-color-empty: #ccc !default;
+$rating-max-value: 5 !default;
+///
+$rating-steps-value: .25 !default;
+///
+$rating-color-empty: #dddddd !default;
 ///
 $rating-color-full: gold !default;
 ///
 $rating-color-hover: grey !default;
-///
-$rating-star-spacing: 3px !default;
-///
-$rating-values: (
-   '0.25', '0.50', '0.75', '1.00',
-   '1.25', '1.50', '1.75', '2.00',
-   '2.25', '2.50', '2.75', '3.00',
-   '3.25', '3.50', '3.75', '4.00',
-   '4.25', '4.50', '4.75', '5.00'
- );
-///
-$rating-icon-names: (
-  'quarter': '.icon-star-quarter',
-  'half': '.icon-star-half',
-  'three-quarters': '.icon-star-three-quarters',
-  'full': '.icon-star-full'
-);
+/// This variable is a map containing the "d" attribute of each of the SVG icons
+$rating-icons-paths: (
+  quarter: 'M196.208 415.2v-224.8l-139.504 20.272 100.944 98.384-23.84 138.928z',
+  half: 'M258.672 64l-62.384 126.4-139.504 20.272 100.944 98.384-23.84 138.928 124.768-65.6v-318.4z',
+  three-quarters: 'M321.616 190.496l-0.656-0.096-62.384-126.4-62.384 126.4-139.504 20.272 100.944 98.384-23.84 138.928 124.768-65.6 63.024 33.136z',
+  full: 'M457.888 210.672l-139.504-20.272-62.384-126.4-62.384 126.4-139.504 20.272 100.944 98.384-23.84 138.928 124.768-65.6 124.768 65.6-23.84-138.928c0 0 100.944-98.384 100.944-98.384z'
+) !default;
 
-/// This is a CSS-only star rating component that shows the proper rating depending on a data-attribute value. JS logic behing this component should round up values per quarter.
-/// @param {string} $rating-type [clickable] - Indicates if whether this component should be clickable or representative. Accepted values: `clickable` or `representative`.
-/// @example markup
-///   <div class="c-rating" data-rating-value="3.25">
-///     <button></button>
-///     <button></button>
-///     <button></button>
-///     <button></button>
-///     <button></button>
-///   </div>
+/// Creates a dynamic list of values that increment .25 each from 0 to 5
+/// @return {list}
+@function rating-values() {
+  $rating-values: ();
 
-@mixin c-rating($type: $rating-type) {
-  @if not index(clickable representative, $type) {
-    @error "Type must be either `clickable` or `representative`.";
+  @for $i from $rating-min-value through ($rating-max-value / $rating-steps-value) {
+    $rating-value: abs($i * $rating-steps-value);
+    $rating-values: append($rating-values, $rating-value, 'comma');
   }
 
-  .c-rating {
-    @include clearfix();
+  @return $rating-values;
+}
 
+/// This is a CSS-only star rating component that shows the proper rating depending on a data-attribute value. JS logic behind this component should round up values per quarter.
+/// @param {number} $star-size [20px] - Provides width and height for each of the stars.
+/// @param {string} $star-element [button] - Element to use for each of the stars.
+/// @param {string} $interaction-type [representative] - Indicates whether this component should be clickable or representative. Accepted values: `clickable` or `representative`.
+/// @example scss
+///   .class {
+///     @include c-rating(toem(20px), button, clickable);
+///   }
+/// @example markup
+///   <div class="c-rating" data-rating-value="3.25">
+///     <button>1</button>
+///     <button>2</button>
+///     <button>3</button>
+///     <button>4</button>
+///     <button>5</button>
+///   </div>
+@mixin c-rating($star-size: 20px, $star-element: button, $interaction-type: representative) {
+  @if not index(clickable representative, $interaction-type) {
+    @error "Interaction type must be either `clickable` or `representative`.";
+  }
+
+  #{$star-element} {
     display: inline-block;
+    float: left;
+    width: $star-size;
+    height: $star-size;
+    border: 0;
+    text-indent: -9999px;
+    outline: none;
+    background: get-icon(map-get($rating-icons-paths, full), $rating-color-empty);
 
-    @if $type == representative {
-      pointer-events: none;
-    }
+    @if $interaction-type == clickable {
+      cursor: pointer;
+      transition: background 0.25s ease;
 
-    button {
-      @extend .ms-icon;
-      @extend #{map-get($rating-icon-names, 'full')};
-
-      position: relative;
-      float: left;
-      padding: 0 $rating-star-spacing;
-      font-size: toem(16px);
-      color: $rating-color-empty;
-      background-color: transparent;
-      border: none;
-      transition: color $msuxf-transition-duration $msuxf-transition-timing;
-
-      &:first-child {
-        margin-left: 0;
-      }
-
-      @if $type == clickable {
-        &:hover,
-        &:hover~button {
-          color: $rating-color-empty !important;
-
-          &:after {
-            color: $rating-color-empty !important;
-          }
-        }
+      // Override background images on hover state
+      &:hover,
+      &:hover ~ #{$star-element} {
+        background: get-icon(map-get($rating-icons-paths, full), $rating-color-empty) !important;
       }
     }
+  }
 
-    @if $type == clickable {
-      &:hover {
-        button {
-          color: $rating-color-hover !important;
-          transition: none;
-
-          &:after {
-            color: $rating-color-hover !important;
-          }
-        }
+  // Override background images on hover state
+  @if $interaction-type == clickable {
+    &:hover {
+      #{$star-element} {
+        background: get-icon(map-get($rating-icons-paths, full), $rating-color-hover) !important;
       }
     }
+  }
 
-    @each $rating-value in $rating-values {
-      // Get the next higher integer.
-      $rating-value-ceil: ceil(to-number($rating-value));
-      &[data-rating-value="#{unquote($rating-value)}"] {
-        button:nth-child(-n+#{$rating-value-ceil}) {
-          color: $rating-color-full;
+  @each $rating-value in rating-values() {
+    // Get the next higher integer.
+    $rating-value-ceil: ceil($rating-value);
+
+    &[data-rating-value="#{$rating-value}"] {
+      #{$star-element}:nth-child(-n+#{$rating-value-ceil}) {
+        background: get-icon(map-get($rating-icons-paths, full), $rating-color-full);
+      }
+
+      #{$star-element}:nth-child(#{$rating-value-ceil}) {
+        // Evaluate which fraction of a star this value is and add the proper background
+        @if str-slice("#{$rating-value}", 2, 4) == '.25' {
+          background: get-icon(map-get($rating-icons-paths, quarter), $rating-color-full), get-icon(map-get($rating-icons-paths, full), $rating-color-empty);
         }
-
-        button:nth-child(#{$rating-value-ceil}) {
-          @if explode($rating-value, '.') == '.25' {
-            @extend #{map-get($rating-icon-names, 'quarter')};
-          }
-          @else if explode($rating-value, '.') == '.50' {
-            @extend #{map-get($rating-icon-names, 'half')};
-          }
-          @else if explode($rating-value, '.') == '.75' {
-            @extend #{map-get($rating-icon-names, 'three-quarters')};
-          }
-
-          &:before {
-            position: relative;
-            z-index: 1;
-          }
-
-          &:after {
-            @extend .icon-star-full:before;
-
-            position: absolute;
-            left: $rating-star-spacing;
-            z-index: 0;
-            color: $rating-color-empty;
-          }
+        @else if str-slice("#{$rating-value}", 2, 4) == '.5' {
+          background: get-icon(map-get($rating-icons-paths, half), $rating-color-full), get-icon(map-get($rating-icons-paths, full), $rating-color-empty);
+        }
+        @else if str-slice("#{$rating-value}", 2, 4) == '.75' {
+          background: get-icon(map-get($rating-icons-paths, three-quarters), $rating-color-full), get-icon(map-get($rating-icons-paths, full), $rating-color-empty);
         }
       }
     }

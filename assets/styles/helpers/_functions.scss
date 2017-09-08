@@ -136,6 +136,28 @@
   @return $new;
 }
 
+/// URL-encode color SASS function / convert color to hex SASS function.
+/// @param {color} $color - Hex color value to convert.
+/// @return {string} URL-encode color value.
+@function color-encode($color) {
+	@if type-of($color) == 'color' {
+    $hex: str-slice(ie-hex-str($color), 4);
+    $color: unquote("#{$hex}");
+  }
+
+  $color: '%23' + $color;
+
+  @return $color;
+}
+
+/// Generates an SVG with a given fill color depending on the type of icon passed as parameter. The SVG string is scaped for cross-browser support.
+/// @param {string} $icon - Type of icon.
+/// @param {color} $color - Passes the fill color of the SVG icon that is being generated.
+/// @return {string} background value.
+@function get-icon($icon, $color) {
+  @return url('data:image/svg+xml;utf8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20width%3D%22512%22%20height%3D%22512%22%20viewBox%3D%220%200%20512%20512%22%3E%3Cpath%20fill%3D%22' + color-encode($color) + '%22%20d%3D%22' + $icon + '%22%3E%3C%2Fpath%3E%3C%2Fsvg%3E') center / cover no-repeat;
+}
+
 /// Get values in a multidimentional map
 /// @author Hugo Giraudel
 /// @param {map} $map - Map
