@@ -5,9 +5,9 @@
 ////
 
 /// Convert to EMs function
-/// @param {Number} target - The value to be converted
-/// @param {Number} context [$msuxf-font-size] The base font size
-/// @return {Em} value
+/// @param {number} target - The value to be converted
+/// @param {number} context [$msuxf-font-size] The base font size
+/// @return {em} value
 @function toem($target, $context: $msuxf-font-size) {
   @if $target == 0 {
     @return 0
@@ -17,9 +17,9 @@
 }
 
 /// Convert to REMs function
-/// @param {Number} target - The value to be converted
-/// @param {Number} context [$msuxf-font-size] - The base font size
-/// @return {Rem} value
+/// @param {number} target - The value to be converted
+/// @param {number} context [$msuxf-font-size] - The base font size
+/// @return {rem} value
 @function torem($target, $context: $msuxf-font-size) {
   @if $target == 0 {
     @return 0
@@ -29,38 +29,38 @@
 }
 
 /// Remove unit from value
-/// @param {Number} value - The entire value
-/// @return {Number} The striped value
+/// @param {number} value - The entire value
+/// @return {number} The striped value
 @function strip-unit($value) {
   @return $value / ($value * 0 + 1);
 }
 
 /// Lighten a color
-/// @param {String | Color} color - The color to be lighten
-/// @param {Number} percentage - The percent to be lighten
-/// @return {String | Color} color
+/// @param {string | Color} color - The color to be lighten
+/// @param {number} percentage - The percent to be lighten
+/// @return {string | Color} color
 @function tint($color, $percentage) {
   @return mix(white, $color, $percentage);
 }
 
 /// Darken a color
-/// @param {String | Color} color - The color to be darken
-/// @param {Number} percentage - The percent to be darken
-/// @return {String | Color} color
+/// @param {string | Color} color - The color to be darken
+/// @param {number} percentage - The percent to be darken
+/// @return {string | Color} color
 @function shade($color, $percentage) {
   @return mix(black, $color, $percentage);
 }
 
 /// Explode a string in a PHP fashion
-/// @param {String} string - Target string
-/// @param {String} dem - Delimiter character
-/// @return {String} Exploded string
-@function explode($string, $dem) {
+/// @param {string} string - Target string
+/// @param {string} delimiter - Delimiter character
+/// @return {string} Exploded string
+@function str-explode($string, $delimiter) {
   $list: ();
   $sum: str-length($string);
 
   @for $i from 1 through $sum {
-    $str: str-index($string, $dem);
+    $str: str-index($string, $delimiter);
 
     @if str-length($string) >= 1 and $str == null {
       $list: append($list, $string, comma);
@@ -81,6 +81,60 @@
   }
 }
 
+/// Replace `$search` with `$replace` in `$string`
+/// @author Hugo Giraudel
+/// @param {string} $string - Initial string
+/// @param {string} $search - Substring to replace
+/// @param {string} $replace ('') - New value
+/// @return {string} - Updated string
+@function str-replace($string, $search, $replace: '') {
+  $index: str-index($string, $search);
+
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  }
+
+  @return $string;
+}
+
+/// String URL encode function
+/// @param {string}
+@function url-encode($string) {
+  $map: (
+    "%": "%25",
+    "<": "%3C",
+    ">": "%3E",
+    " ": "%20",
+    "!": "%21",
+    "*": "%2A",
+    "'": "%27",
+    '"': "%22",
+    "(": "%28",
+    ")": "%29",
+    ";": "%3B",
+    ":": "%3A",
+    "@": "%40",
+    "&": "%26",
+    "=": "%3D",
+    "+": "%2B",
+    "$": "%24",
+    ",": "%2C",
+    "/": "%2F",
+    "?": "%3F",
+    "#": "%23",
+    "[": "%5B",
+    "]": "%5D"
+  );
+
+  $new: $string;
+
+  @each $search, $replace in $map {
+    $new: str-replace($new, $search, $replace);
+  }
+
+  @return $new;
+}
+
 /// Get values in a multidimentional map
 /// @author Hugo Giraudel
 /// @param {map} $map - Map
@@ -95,8 +149,8 @@
 
 /// Returns the opposite direction of each direction in a list
 /// @author Hugo Giraudel
-/// @param {List} $directions - List of initial directions
-/// @return {List} - List of opposite directions
+/// @param {list} $directions - List of initial directions
+/// @return {list} - List of opposite directions
 @function opposite-direction($directions) {
   $opposite-directions: ();
   $direction-map: (
