@@ -27,7 +27,7 @@ var gulp = require('gulp'),
   csso = require('gulp-csso'),
   // Require Css-MQpacker// Clean CSS
   mqpacker = require('css-mqpacker'),
-  sortCSSmq = require('sort-css-media-queries'),
+  mqsorter = require('sort-css-media-queries'),
   // Image optimization plugin
   imagemin = require('gulp-imagemin'),
   // Image optimization using Kraken API
@@ -92,7 +92,7 @@ var config = {
         ]
       }),
       mqpacker({
-        sort: sortCSSmq
+        sort: mqsorter
       })
     ]
   },
