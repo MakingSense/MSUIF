@@ -263,7 +263,7 @@ gulp.task('js:dist', function() {
   return gulp.src([config.folderAssets.js + '/**/*.js'])
     .pipe(sourcemaps.init())
     .pipe(concat('app.js', {
-      newLine: ';'
+      newLine: "\r\n;"
     }))
     .pipe(uglify())
     .pipe(sourcemaps.write('./'))
@@ -274,7 +274,7 @@ gulp.task('js:dist', function() {
 gulp.task('copy:vendors', function() {
   return gulp.src([config.folderAssets.js + '/vendors/*.js'])
     .pipe(concat('vendors.js', {
-      newLine: ';'
+      newLine: "\r\n;"
     }))
     .pipe(gulp.dest(config.folderDev.js));
 });
@@ -283,7 +283,7 @@ gulp.task('copy:vendors', function() {
 gulp.task('copy:js', ['copy:vendors'], function() {
   return gulp.src([config.folderAssets.js + '/*.js'])
     .pipe(concat('main.js', {
-      newLine: ';'
+      newLine: "\r\n;"
     }))
     .pipe(gulp.dest(config.folderDev.js));
 });
