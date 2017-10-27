@@ -58,7 +58,7 @@ $c-button-border-radius: toem(5px) !default;
 /// @param {size} $height - Total height of the button.
 /// @param {size} $stroke - Line width.
 /// @param {color} $color - Main button color.
-/// @param {string} $transition [.25s ease-in-out] - Transition timing used for animation.
+/// @param {string} $transition [MSUXF default global setting] - Transition timing used for animation.
 /// @example scss - Using the mixin
 ///   .mobile-button {
 ///     @include mobile-menu-button(23px, 14px, 2px, #424242);
