@@ -53,7 +53,7 @@ $c-button-border-radius: toem(5px) !default;
   }
 }
 
-/// Mixin for generating the burguer-ish button used in mobile menus. This button is also transformed into an X when adding the <code>opened</code> class to the element (as an indicator for closing the mobile menu).
+/// Mixin for generating the burguer-ish button used in mobile menus. This button is also transformed into an X when adding the <code>active</code> class to the element (as an indicator for closing the mobile menu).
 /// @param {size} $width - Total width of the button.
 /// @param {size} $height - Total height of the button.
 /// @param {size} $stroke - Line width.
@@ -115,7 +115,7 @@ $c-button-border-radius: toem(5px) !default;
       transform-origin: left center;
     }
   }
-  &.opened {
+  &.active {
     span {
       &:nth-child(1) {
         transform: rotate(45deg);
