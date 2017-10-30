@@ -60,76 +60,68 @@ $c-button-border-radius: toem(5px) !default;
 /// @param {color} $color - Main button color.
 /// @param {string} $transition [MSUXF default global setting] - Transition timing used for animation.
 /// @example scss - Using the mixin
-///   .mobile-button {
-///     @include mobile-menu-button(23px, 14px, 2px, #424242);
-///   }
+///   @include c-mobile-menu-button(23px, 14px, 2px, #424242);
 /// @example markup - For the button to work as intended, the element must have three spans within.
-/// <div class="mobile-button">
+/// <div class="mobile-menu-button">
 ///   <span></span>
 ///   <span></span>
 ///   <span></span>
 /// </div>
 /// @todo Maybe adding different animations?
 
-@mixin c-mobile-menu-button($width, $height, $stroke, $color, $transition: 'default') {
-  $sin45: 0.70710678118; //sqrt(2)/2 = sin(45 deg)
-  $cos45: $sin45;
-  $offset-y: ($width * $sin45 - $height + $stroke) / 2;
-  $offset-x: ($width * $cos45 - $width) / 2;
-  @if $transition == 'default' {
-    @if $msuxf-transition-duration and $msuxf-transition-timing {
-      // If msuxf are ser, we use them
-      $transition: $msuxf-transition-duration + ' ' + $msuxf-transition-timing;
-    } @else {
-      // else, just some standard animation
-      $transition: '.25s ease';
-    }
-  }
-  width: $width;
-  height: $height;
-  position: relative;
-  transform: rotate(0deg);
-  cursor: pointer;
-  span {
-    display: block;
-    position: absolute;
-    height: $stroke;
-    width: 100%;
-    background: $color;
-    border-radius: calc(#{$stroke} / 2);
-    opacity: 1;
-    left: 0;
-    transform: rotate(0deg);
-    transition: #{$transition};
+///
+$mobile-menu-button-transition: $msuxf-transition-duration + ' ' + $msuxf-transition-timing !default;
 
-    &:nth-child(1) {
-      top: 0;
-      transform-origin: left center;
-    }
-    &:nth-child(2) {
-      top: calc(50% - #{$stroke} / 2);
-      transform-origin: left center;
-    }
-    &:nth-child(3) {
-      bottom: 0;
-      transform-origin: left center;
-    }
-  }
-  &.active {
+@mixin c-mobile-menu-button($width, $height, $stroke, $color) {
+  .mobile-menu-button {
+    $sin45: 0.70710678118; //sqrt(2)/2 = sin(45 deg)
+    $cos45: $sin45;
+    $offset-y: ($width * $sin45 - $height + $stroke) / 2;
+    $offset-x: ($width * $cos45 - $width) / 2;
+    width: $width;
+    height: $height;
+    position: relative;
+    transform: rotate(0deg);
+    cursor: pointer;
     span {
+      display: block;
+      position: absolute;
+      height: $stroke;
+      width: 100%;
+      background: $color;
+      border-radius: calc(#{$stroke} / 2);
+      opacity: 1;
+      left: 0;
+      transform: rotate(0deg);
+      transition: #{$mobile-menu-button-transition};
+      transform-origin: left center;
+
       &:nth-child(1) {
-        transform: rotate(45deg);
-        top: -($offset-y);
-        left: -($offset-x);
+        top: 0;
       }
       &:nth-child(2) {
-        width: 0%;
-        opacity: 0;
+        top: calc(50% - #{$stroke} / 2);
       }
       &:nth-child(3) {
-        transform: rotate(-45deg);
-        bottom: -($offset-y);
-        left: -($offset-x);
+        bottom: 0;
+      }
+    }
+    &.active {
+      span {
+        &:nth-child(1) {
+          transform: rotate(45deg);
+          top: -($offset-y);
+          left: -($offset-x);
+        }
+        &:nth-child(2) {
+          width: 0%;
+          opacity: 0;
+        }
+        &:nth-child(3) {
+          transform: rotate(-45deg);
+          bottom: -($offset-y);
+          left: -($offset-x);
+        }
       }
     }
   }
