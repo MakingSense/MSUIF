@@ -52,3 +52,83 @@ $c-button-border-radius: toem(5px) !default;
     }
   }
 }
+
+/// Mixin for generating the burguer-ish button used in mobile menus. This button is also transformed into an X when adding the <code>active</code> class to the element (as an indicator for closing the mobile menu).
+/// @param {size} $width - Total width of the button.
+/// @param {size} $height - Total height of the button.
+/// @param {size} $stroke - Line width.
+/// @param {color} $color - Main button color.
+/// @param {string} $transition [MSUXF default global setting] - Transition timing used for animation.
+/// @example scss - Using the mixin
+///   @include c-mobile-menu-button(23px, 14px, 2px, #424242);
+/// @example markup - For the button to work as intended, the element must have three spans within.
+/// <div class="mobile-menu-button">
+///   <span></span>
+///   <span></span>
+///   <span></span>
+/// </div>
+/// @todo Maybe adding different animations?
+
+///
+$mobile-menu-button-transition: $msuxf-transition-duration + ' ' + $msuxf-transition-timing !default;
+
+@mixin c-mobile-menu-button($width, $height, $stroke, $color) {
+  $sin45: 0.70710678118; //sqrt(2)/2 = sin(45 deg)
+  $cos45: $sin45;
+  $offset-y: ($width * $sin45 - $height + $stroke) / 2;
+  $offset-x: ($width * $cos45 - $width) / 2;
+
+  .mobile-menu-button {
+    position: relative;
+    width: $width;
+    height: $height;
+    transform: rotate(0deg);
+    cursor: pointer;
+
+    span {
+      position: absolute;
+      left: 0;
+      display: block;
+      opacity: 1;
+      width: 100%;
+      height: $stroke;
+      border-radius: calc(#{$stroke} / 2);
+      background: $color;
+      transform: rotate(0deg);
+      transition: #{$mobile-menu-button-transition};
+      transform-origin: left center;
+
+      &:nth-child(1) {
+        top: 0;
+      }
+
+      &:nth-child(2) {
+        top: calc(50% - #{$stroke} / 2);
+      }
+
+      &:nth-child(3) {
+        bottom: 0;
+      }
+    }
+    &.active {
+      span {
+        &:nth-child(1) {
+          transform: rotate(45deg);
+          top: -($offset-y);
+          left: -($offset-x);
+        }
+
+        &:nth-child(2) {
+          width: 0%;
+          opacity: 0;
+        }
+
+        &:nth-child(3) {
+          transform: rotate(-45deg);
+          bottom: -($offset-y);
+          left: -($offset-x);
+        }
+      }
+    }
+  }
+}
