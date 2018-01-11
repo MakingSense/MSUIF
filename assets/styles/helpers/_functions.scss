@@ -98,7 +98,7 @@
 }
 
 /// String URL encode function
-/// @param {string}
+/// @param {string} string
 /// @return {string} - URL encoded string
 @function url-encode($string) {
   $map: (

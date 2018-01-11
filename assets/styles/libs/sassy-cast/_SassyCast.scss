@@ -107,7 +107,7 @@ $sc-constants: (
 /// @return {List}
 @function to-list($value) {
   $type: type-of($value);
-  
+
   // If the value is already a list, we can safely return it.
   @if ($type == 'list') {
     @return $value;
@@ -275,10 +275,10 @@ $sc-constants: (
 /// @access private
 /// @param {string} $string - string
 /// @return {Color | String} - string or hex color depending on the match
-/// @require {function} _hex-to-dec
+/// @require {function} _sc-hex-to-dec
 @function _sc-from-hex($string) {
   $string: to-lower-case($string);
-  $r: ''; 
+  $r: '';
   $g: '';
   $b: '';
   $hex: map-get($sc-constants, 'HEXADECIMAL_SPACE');
@@ -337,7 +337,7 @@ $sc-constants: (
 
   @for $i from 1 through str-length($value) {
     $character: str-slice($value, $i, $i);
-  
+
     // If the character is neither the part of the function name, nor a space or
     // a parenthese, we proceed further.
     @if not index($discarded-characters, $character) {
@@ -347,7 +347,7 @@ $sc-constants: (
         $current-channel-index: index($channel-keys, $current-channel);
         $current-channel: nth($channel-keys, $current-channel-index + 1);
       }
-  
+
       // If the current character is not a comma, it means it is part of the
       // value for the current channel and therefore should be saved.
       @else {
@@ -356,18 +356,18 @@ $sc-constants: (
       }
     }
   }
-  
+
   $hue: to-number(map-get($channels, 'h'));
   $saturation: to-number(map-get($channels, 's'));
   $lightness: to-number(map-get($channels, 'l'));
   $alpha: map-get($channels, 'a');
 
-  // If there is no alpha channel registered, return a classic hsl(..) call.  
+  // If there is no alpha channel registered, return a classic hsl(..) call.
   @if ($alpha == '') {
     @return hsl($hue, $saturation, $lightness);
   }
-  
-  // If there is a registered alpha channel, return a hsla(..) call.  
+
+  // If there is a registered alpha channel, return a hsla(..) call.
   @return hsla($hue, $saturation, $lightness, to-number($alpha));
 }
 
@@ -394,7 +394,7 @@ $sc-constants: (
         $current-channel-index: index($channel-keys, $current-channel);
         $current-channel: nth($channel-keys, $current-channel-index + 1);
       }
-  
+
       // If the current character is not a comma, it means it is part of the
       // value for the current channel and therefore should be saved.
       @else {
@@ -403,18 +403,18 @@ $sc-constants: (
       }
     }
   }
-  
+
   $red: to-number(map-get($channels, 'r'));
   $green: to-number(map-get($channels, 'g'));
   $blue: to-number(map-get($channels, 'b'));
   $alpha: map-get($channels, 'a');
-  
-  // If there is no alpha channel registered, return a classic hsl(..) call.  
+
+  // If there is no alpha channel registered, return a classic hsl(..) call.
   @if ($alpha == '') {
     @return rgb($red, $green, $blue);
   }
 
-  // If there is a registered alpha channel, return a rgba(..) call.    
+  // If there is a registered alpha channel, return a rgba(..) call.
   @return rgba($red, $green, $blue, to-number($alpha));
 }
 
