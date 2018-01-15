@@ -356,7 +356,7 @@ gulp.task('deploy', ['build'], function() {
 // Define Dist generation and zipping
 gulp.task('dist:zip', ['dist'], function() {
   var today = new Date();
-  return gulp.src(config.folderDist.base + '**/*')
+  return gulp.src(config.folderDist.base + '/**/*')
     .pipe(zip('deploy--' +
       today.getFullYear() + '-' +
       (today.getMonth() + 1) + '-' +
