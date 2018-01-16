@@ -53,6 +53,9 @@ $c-button-border-radius: toem(5px) !default;
   }
 }
 
+///
+$mobile-menu-button-transition: $msuxf-transition-duration + ' ' + $msuxf-transition-timing !default;
+
 /// Mixin for generating the burguer-ish button used in mobile menus. This button is also transformed into an X when adding the <code>active</code> class to the element (as an indicator for closing the mobile menu).
 /// @param {size} $width - Total width of the button.
 /// @param {size} $height - Total height of the button.
@@ -68,9 +71,6 @@ $c-button-border-radius: toem(5px) !default;
 ///   <span></span>
 /// </div>
 /// @todo Maybe adding different animations?
-
-///
-$mobile-menu-button-transition: $msuxf-transition-duration + ' ' + $msuxf-transition-timing !default;
 
 @mixin c-mobile-menu-button($width, $height, $stroke, $color) {
   $sin45: 0.70710678118; //sqrt(2)/2 = sin(45 deg)
